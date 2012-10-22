@@ -1,0 +1,4 @@
+name = Kraftwagen Environment
+description = Access the Kraftwagen Environment from Drupal
+
+core = 7.x
