@@ -77,7 +77,7 @@ function _kw_enviroment_location() {
   while ($dir) {
     $env_path = $dir . DIRECTORY_SEPARATOR . 'cnf' . DIRECTORY_SEPARATOR . 'environment';
     if (file_exists($env_path)) {
-      return $env_path
+      return $env_path;
     }
 
     // try to find the parent directory
