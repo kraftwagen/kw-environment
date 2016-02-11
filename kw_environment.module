@@ -19,23 +19,22 @@ define('KW_ENVIRONMENT_DEFAULT', 'production');
 function kw_environment() {
   $environment = &drupal_static(__FUNCTION__, NULL);
 
-  if (!isset($environment)) {
+  if (empty($environment)) {
     if ($cache = cache_get(__FUNCTION__)) {
       $environment = $cache->data;
     }
 
-    if (!isset($environment)) {
-      $location = kw_environment_location();
-      if (!$location) {
-        $environment = KW_ENVIRONMENT_DEFAULT;
+    if (empty($environment)) {
+      if ($location = kw_environment_location()) {
+        $environment = file_get_contents($location);
       }
 
-      $environment = file_get_contents($location);
+      $environment = $environment ? $environment : KW_ENVIRONMENT_DEFAULT;
       cache_set(__FUNCTION__, $environment);
     }
   }
 
-  return $environment ? $environment : KW_ENVIRONMENT_DEFAULT;
+  return $environment;
 }
 
 /**
